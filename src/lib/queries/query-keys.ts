@@ -1,0 +1,27 @@
+export const queryKeys = {
+  userRoles: (userId: string | null | undefined) => ["user-roles", userId] as const,
+  alertesDashboard: (filters: Record<string, unknown> = {}) =>
+    ["alertes-dashboard", filters] as const,
+  dashboardKpis: () => ["dashboard-kpis"] as const,
+  alertesEvolution: (jours: number) => ["alertes-evolution", jours] as const,
+  regionsStats: () => ["regions-stats"] as const,
+  categoriesStats: () => ["categories-stats"] as const,
+  sourcesStats: () => ["sources-stats"] as const,
+  topAnalystes: () => ["top-analystes"] as const,
+  signalements: (filters: Record<string, unknown> = {}) => ["signalements", filters] as const,
+  factChecks: (filters: Record<string, unknown> = {}) => ["fact-checks", filters] as const,
+  institutions: () => ["institutions"] as const,
+  notifications: (userId: string | null | undefined) => ["notifications", userId] as const,
+  notificationsUnreadCount: (userId: string | null | undefined) =>
+    ["notifications-unread-count", userId] as const,
+  articles: (filters: Record<string, unknown> = {}) => ["articles", filters] as const,
+  auditLogs: (filters: Record<string, unknown> = {}) => ["audit-logs", filters] as const,
+  utilisateurs: () => ["utilisateurs"] as const,
+  categories: () => ["categories"] as const,
+  iaConfig: () => ["ia-config"] as const,
+  iaModeles: () => ["ia-modeles"] as const,
+  apiKeys: () => ["api-keys"] as const,
+  integrations: () => ["integrations"] as const,
+  preferences: (userId: string | null | undefined) => ["preferences", userId] as const,
+  profile: (userId: string | null | undefined) => ["profile", userId] as const,
+};
