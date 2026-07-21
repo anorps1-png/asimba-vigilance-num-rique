@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import {
   LayoutDashboard,
   Bell,
@@ -21,8 +21,9 @@ import {
   HelpCircle,
   LogOut,
   Menu,
+  Loader2,
 } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useState, type ReactNode, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -436,6 +437,25 @@ export function AppLayout({
   actions?: ReactNode;
 }) {
   const [collapsed, setCollapsed] = useState(false);
+  const { email, loading } = useCurrentUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && !loading && !email) {
+      navigate({ to: "/connexion" });
+    }
+  }, [loading, email, navigate]);
+
+  if (loading || !email) {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="h-6 w-6 animate-spin text-primary" />
+          <span className="text-[12.5px] text-muted-foreground font-medium">Vérification de la session...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-background">
